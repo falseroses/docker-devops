@@ -1,12 +1,12 @@
 version: "3.9"
+
 services:
   web:
     image: "nginx:latest"
-    build: .
     ports:
       - "80:80"
       - "443:443"
   php:
-    image: ""
+    image: "php:7.4-fpm"
   redis:
     image: "redis:latest"
