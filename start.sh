@@ -1,8 +1,6 @@
 #!/bin/bash
 
 source aws_credentials
-echo $AWS_ACCESS_KEY_ID
-echo $AWS_SECRET_ACCESS_KEY
 PS3='Choose Docker Image: '
 options=("Ansible" "Terraform" "Quit")
 select opt in "${options[@]}"

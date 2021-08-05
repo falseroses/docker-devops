@@ -8,7 +8,7 @@ RUN unzip awscliv2.zip
 RUN ./aws/install
 
 
-RUN echo -e '#!/bin/bash\nans "$@"' > /usr/bin/ans && \
+RUN echo -e '#!/bin/bash\nansible "$@"' > /usr/bin/ans && \
     chmod +x /usr/bin/ans
 
 ENV ANSIBLE_HOST_KEY_CHECKING=False
