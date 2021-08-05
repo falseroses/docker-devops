@@ -1,2 +1,2 @@
 # docker-devops
-![alt text](https://raw.githubusercontent.com/falseroses/docker-devops/main/Docs/task_image.jpg)
+![alt text](https://github.com/falseroses/docker-devops/blob/master/Docs/task_image?raw=true)
