@@ -12,7 +12,7 @@ do
             ;;
         "Terraform")
             docker build -t terraform:latest terraform/ --build-arg TER_VER=`curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | cut -d: -f2 | tr -d \"\,\v | awk '{$1=$1};1'`
-            docker run -v $PWD/ansible/ansible-conf/:/volumes/terraform-conf -v $PWD/terraform/ssh-key/:/volumes/ssh-key -it terraform:latest
+            docker run -v $PWD/terraform/terraform-conf/:/volumes/terraform-conf -v $PWD/terraform/ssh-key/:/volumes/ssh-key -it terraform:latest
             break
             ;;
         "Quit")
