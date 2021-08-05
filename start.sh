@@ -1,5 +1,4 @@
 #!/bin/bash
-# Bash Menu Script Example
 
 PS3='Choose Docker Image: '
 options=("Ansible" "Terraform" "Quit")
