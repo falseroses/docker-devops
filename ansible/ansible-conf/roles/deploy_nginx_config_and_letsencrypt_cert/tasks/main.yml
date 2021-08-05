@@ -1,0 +1,8 @@
+---
+# tasks file for deploy_nginx_config_and_letsencrypt_cert
+- name: Copy Nginx Config
+  copy: src=nginx.conf dest=/etc/nginx mode=0555
+  notify: Restart Nginx
+
+- name: Generate HTTPS Certificates
+  shell: certbot --nginx -n --agree-tos --email sasha.duminskiy@gmail.com --domains falseroses.xyz

@@ -1,0 +1,2 @@
+[dev_servers]
+webserv1 ansible_host=35.158.98.91

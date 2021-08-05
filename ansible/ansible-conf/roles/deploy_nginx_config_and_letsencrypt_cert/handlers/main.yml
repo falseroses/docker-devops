@@ -1,0 +1,4 @@
+---
+# handlers file for deploy_nginx_config_and_letsencrypt_cert
+- name: Restart Nginx
+  service: name=nginx state=restarted

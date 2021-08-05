@@ -1,0 +1,20 @@
+---
+- name: Install Redis and Create User
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Enable Amazon-Linux-Extras Packages
+    shell: |
+      amazon-linux-extras enable redis6
+      yum clean metadata
+
+  - name: Install Redis
+    yum: name=redis state=latest
+
+  - name: Set Redis Password
+    copy: src=redis.conf dest=/etc/redis/redis.conf mode=0555 
+
+  - name: Start Redis and Enable Redis Service
+    service: name=redis state=started enabled=yes
+

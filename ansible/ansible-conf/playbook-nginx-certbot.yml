@@ -1,0 +1,42 @@
+---
+- name: Install Nginx and Clone Website
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Enable Amazon-Linux-Extras Packages
+    shell: |
+      amazon-linux-extras enable nginx1 epel
+      yum clean metadata
+
+  - name: Install Nginx, Git, Epel and Certbot
+    yum: name={{ item }} state=latest
+    loop:
+      - nginx
+      - git
+      - epel-release
+      - certbot-nginx
+
+  - name: Start WebServer and Enable Nginx Service
+    service: name=nginx state=started enabled=yes
+
+  - name: Create Site Folder Structure
+    file:
+       path: /var/www/falseroses.xyz
+       state: directory
+
+  - name: Git Clone Website
+    git:
+      repo: 'https://github.com/falseroses/falseroses.xyz.git'
+      dest: /var/www/falseroses.xyz/html
+    notify: Restart Nginx
+
+  handlers:
+  - name: Restart Nginx
+    service: name=nginx state=restarted
+
+- name: Deploy Nginx Config and Generate HTTPS Certificates
+  hosts: all
+  become: yes
+  roles:
+    - deploy_nginx_config_and_letsencrypt_cert
