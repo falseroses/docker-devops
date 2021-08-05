@@ -8,5 +8,11 @@ RUN unzip terraform_${TER_VER}_linux_amd64.zip
 RUN mv terraform /usr/local/bin/
 
 
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+
+
 RUN echo -e '#!/bin/bash\nterraform "$@"' > /usr/bin/tf && \
     chmod +x /usr/bin/tf
