@@ -11,6 +11,11 @@ RUN ./aws/install
 RUN echo -e '#!/bin/bash\nans "$@"' > /usr/bin/ans && \
     chmod +x /usr/bin/ans
 
+ENV ANSIBLE_HOST_KEY_CHECKING=False
+ENV DEFAULT_HOST_LIST=/volumes/ansible-conf/hosts.txt
+ENV INTERPRETER_PYTHON=auto_silent
+ENV DEPRECATION_WARNINGS=False
+
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
 ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
