@@ -16,3 +16,5 @@ ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
 RUN echo -e '#!/bin/bash\nterraform "$@"' > /usr/bin/tf && \
     chmod +x /usr/bin/tf
+
+WORKDIR /volumes
