@@ -33,7 +33,7 @@ do
             break
             ;;
         "Set SSH Key")
-            read -p "Type Path to Your SSH Key: " -e path
+            read -p "Drag and Drop or Type Path to Your SSH Key: " -e path
             if cp $path credentials/ssh-key ; then
                 echo -e "\033[1mSUCCESSFULLY SAVED YOUR SSH KEY!\033[0m"
             else
