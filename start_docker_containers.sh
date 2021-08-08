@@ -1,7 +1,6 @@
 #!/bin/bash
 
-FILE=aws_credentials
-if [ ! -f "$FILE" ]; then
+if [ ! -f "aws_credentials" ]; then
     echo -e "\033[1mYOU NEED TO SET YOUR AWS CREDENTIALS!\033[0m"
 fi
 PS3='Choose Docker Image: '
