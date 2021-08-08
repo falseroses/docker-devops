@@ -1,12 +1,12 @@
 FROM amazonlinux
 
 RUN yum -y update
-RUN yum -y install wget unzip tree nano
-ARG TER_VER
-RUN wget https://releases.hashicorp.com/terraform/${TER_VER}/terraform_${TER_VER}_linux_amd64.zip
-RUN unzip terraform_${TER_VER}_linux_amd64.zip
-RUN mv terraform /usr/local/bin/
-
+RUN yum -y install wget unzip tree nano git tar
+RUN wget https://golang.org/dl/go1.16.7.linux-amd64.tar.gz
+RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.7.linux-amd64.tar.gz
+ENV PATH=/usr/local/go/bin:$PATH
+RUN git clone https://github.com/hashicorp/terraform.git && cd terraform && go install
+RUN mv ~/go/bin/terraform /usr/local/bin/
 
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
