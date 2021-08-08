@@ -13,7 +13,7 @@ services:
     links:
         - php
   php:
-    image: "php:7-fpm"
+    image: "php:fpm"
     volumes:
         - ./www:/var/www/html
         - ./config/php-fpm/php-fpm.conf:/usr/local/etc/php-fpm.conf
