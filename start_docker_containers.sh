@@ -4,10 +4,10 @@ if [ ! -f credentials/aws_credentials ]; then
     echo -e "\033[1mWARNING: YOU NEED TO SET YOUR AWS CREDENTIALS!\033[0m"
 fi
 if [ ! -f credentials/ssh-key/*.pem ]; then
-    echo -e "\033[1mWARNING: YOU NEED TO PLACE YOUR SSH KEY FILE IN CREDENTIALS/SSH-KEY FOLDER!\033[0m"
+    echo -e "\033[1mWARNING: YOU NEED TO SET YOUR SSH KEY OR PLACE IT IN CREDENTIALS/SSH-KEY FOLDER!\033[0m"
 fi
 PS3='Choose Docker Image: '
-options=("Ansible" "Terraform" "Set AWS Credentials" "Quit")
+options=("Ansible" "Terraform" "Set AWS Credentials" "Set SSH Key" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -24,17 +24,27 @@ do
             break
             ;;
         "Set AWS Credentials")
-            read -p "Type your AWS_ACCESS_KEY_ID: "
+            read -p "Type Your AWS_ACCESS_KEY_ID: "
             echo "AWS_ACCESS_KEY_ID=$REPLY" > credentials/aws_credentials
-            read -p "Type your AWS_SECRET_ACCESS_KEY: "
+            read -p "Type Your AWS_SECRET_ACCESS_KEY: "
             echo "AWS_SECRET_ACCESS_KEY=$REPLY" >> credentials/aws_credentials
-            echo -e "\033[1mSuccefully saved your AWS Credentials!\033[0m"
+            echo -e "\033[1mSUCCESSFULLY SAVED YOUR AWS CREDENTIALS!\033[0m"
+            ./start_docker_containers.sh
+            break
+            ;;
+        "Set SSH Key")
+            read -p "Type Path to Your SSH Key: " -e path
+            if cp $path credentials/ssh-key ; then
+                echo -e "\033[1mSUCCESSFULLY SAVED YOUR SSH KEY!\033[0m"
+            else
+                echo -e "\033[1mERROR: SOMETHING WENT WRONG.\033[0m"
+            fi
             ./start_docker_containers.sh
             break
             ;;
         "Quit")
             break
             ;;
-        *) echo "invalid option $REPLY";;
+        *) echo "Invalid Option $REPLY";;
     esac
 done
