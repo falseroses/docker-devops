@@ -12,6 +12,8 @@ services:
         - ./logs/nginx:/var/log/nginx
     links:
         - php
+    networks:
+        - frontend
   php:
     image: "php:fpm"
     volumes:
@@ -19,5 +21,20 @@ services:
         - ./config/php-fpm/php-fpm.conf:/usr/local/etc/php-fpm.conf
     links:
         - redis
+    networks:
+        - frontend
+        - backend
   redis:
     image: "redis:latest"
+    networks:
+        - backend
+networks:
+  frontend:
+    driver: bridge
+    ipam:
+       driver: default
+       config:
+         - subnet: 172.16.0.0/24
+           gateway: 172.16.0.1
+  backend:
+    driver: bridge
